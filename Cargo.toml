@@ -6,7 +6,7 @@ edition = "2024"
 [dependencies]
 # seren-ex = { git = "https://github.com/cet-t/seren-ex" }
 seren-ex = { path = "../seren-ex" }
-seren = { git = "https://github.com/cet-t/seren" }
+seren = { git = "https://github.com/cet-t/seren", rev = "0c1c6bf" }
 anyhow = "1"
 poise = "0.7"
 serenity = "0.12"

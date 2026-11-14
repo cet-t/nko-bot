@@ -24,11 +24,7 @@ pub async fn nko_leave(ctx: Context<'_>) -> anyhow::Result<()> {
 #[poise::command(slash_command, name_localized("ja", "んこサブスク"))]
 pub async fn nko_status(ctx: Context<'_>) -> anyhow::Result<()> {
     let r = if let Some(ts) = nkosub::status(ctx.author().id.get()) {
-        let dt = |ts_ms: i64| {
-            let secs = ts_ms / 1_000;
-            let nsecs = ((ts_ms % 1_000) * 1_000_000) as u32;
-            chrono::DateTime::from_timestamp(secs, nsecs).map(|dt| dt.naive_local())
-        };
+        let dt = |ts_ms: i64| chrono::DateTime::from_timestamp(ts_ms, 0).map(|dt| dt.naive_local());
 
         reply!(
             "{}",
@@ -37,6 +33,7 @@ pub async fn nko_status(ctx: Context<'_>) -> anyhow::Result<()> {
     } else {
         reply!("未登録")
     };
+    ctx.send(r.ephemeral(true)).await?;
 
     Ok(())
 }

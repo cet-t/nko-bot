@@ -1040,7 +1040,7 @@ dependencies = [
  "moelle_a 0.1.0 (git+https://github.com/cet-t/moelle_a)",
  "moelle_sample 0.1.0 (git+https://github.com/cet-t/moelle_sample)",
  "poise 0.7.1",
- "seren",
+ "seren 0.1.0 (git+https://github.com/cet-t/seren?rev=0c1c6bf)",
  "seren-ex",
  "serenity",
  "tokio",
@@ -1616,6 +1616,18 @@ dependencies = [
 [[package]]
 name = "seren"
 version = "0.1.0"
+source = "git+https://github.com/cet-t/seren?rev=0c1c6bf#0c1c6bfaac784b84f953dbb910f4f1dafeb99ecd"
+dependencies = [
+ "async-trait",
+ "chrono",
+ "pastey",
+ "poise 0.6.2",
+ "serenity",
+]
+
+[[package]]
+name = "seren"
+version = "0.1.0"
 source = "git+https://github.com/cet-t/seren#1582e817bf18d9eca0d7d2606a16af5cf2de5967"
 dependencies = [
  "async-trait",
@@ -1638,7 +1650,7 @@ dependencies = [
  "moelle_a 0.1.0 (git+https://github.com/cet-t/moelle_a?rev=2c87faf)",
  "moelle_sample 0.1.0 (git+https://github.com/cet-t/moelle_sample?rev=60558eb)",
  "poise 0.7.1",
- "seren",
+ "seren 0.1.0 (git+https://github.com/cet-t/seren)",
  "serenity",
  "tokio",
 ]

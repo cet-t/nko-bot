@@ -4,24 +4,26 @@ use std::{
     io::{BufWriter, Write},
 };
 
-const PATH: &str = "./subs.csv";
+const PATH: &str = concat!(env!("CARGO_MANIFEST_DIR"), "/subs.csv");
 
 pub fn join(id: u64) -> anyhow::Result<()> {
-    let f = fs::File::open(self::PATH)?;
+    let f = fs::OpenOptions::new().append(true).open(self::PATH)?;
     let mut w = BufWriter::new(f);
 
     let ts = chrono::Utc::now().timestamp();
     writeln!(w, "+,{id},{ts}")?;
+    w.flush()?;
 
     Ok(())
 }
 
 pub fn leave(id: u64) -> anyhow::Result<()> {
-    let f = fs::File::open(self::PATH)?;
+    let f = fs::OpenOptions::new().append(true).open(self::PATH)?;
     let mut w = BufWriter::new(f);
 
     let ts = chrono::Utc::now().timestamp();
     writeln!(w, "-,{id},{ts}")?;
+    w.flush()?;
 
     Ok(())
 }
@@ -63,8 +65,10 @@ pub fn load_members() -> anyhow::Result<HashMap<u64, i64>> {
 fn compact(mems: &HashMap<u64, i64>) -> anyhow::Result<()> {
     let f = fs::File::create(PATH)?;
     let mut w = BufWriter::new(f);
+    writeln!(w, "op,id,ts")?;
     mems.iter()
         .try_for_each(|(id, ts)| writeln!(w, "+,{id},{ts}"))?;
+    w.flush()?;
 
     Ok(())
 }
