@@ -1,0 +1,20 @@
+[package]
+name = "nko-bot"
+version = "0.1.0"
+edition = "2024"
+
+[dependencies]
+# seren-ex = { git = "https://github.com/cet-t/seren-ex" }
+seren-ex = { path = "../seren-ex" }
+seren = { git = "https://github.com/cet-t/seren" }
+anyhow = "1"
+poise = "0.7"
+serenity = "0.12"
+tokio = { version = "1.54", features = ["full"] }
+chrono = "0.4.45"
+moelle = "0.1"
+moelle_sample = { git = "https://github.com/cet-t/moelle_sample", features = [
+  "choice",
+] }
+moelle_a = { git = "https://github.com/cet-t/moelle_a", features = ["sfc"] }
+csv = "1.4"
