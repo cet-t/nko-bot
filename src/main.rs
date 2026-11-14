@@ -1,3 +1,5 @@
+use std::{str::FromStr, time::Duration};
+
 use poise::FrameworkOptions;
 use seren_ex::{
     CommandRegistration, CommonCommands, FrameworkConfig, PresenceOptions, SetupOptions,
@@ -33,7 +35,34 @@ async fn main() -> anyhow::Result<()> {
                 }),
                 registration: CommandRegistration::Global,
                 log_ready: true,
-            },
+                custom: None,
+            }
+            .setup(|ctx, ready, _fw| {
+                Box::pin(async move {
+                    println!("{} is ready", ready.user.name);
+
+                    let http = ctx.http.clone();
+                    tokio::spawn(async move {
+                        let schedule = cron::Schedule::from_str("* * 9,21 * * * *").unwrap();
+                        let mut next_tick = schedule.upcoming(chrono::Utc).next().unwrap();
+                        loop {
+                            let now = chrono::Utc::now();
+                            if now >= next_tick {
+                                let _ = nkosub::broadcast(&http).await;
+
+                                next_tick = schedule.upcoming(chrono::Utc).next().unwrap();
+                            }
+
+                            tokio::time::sleep(Duration::from_secs(
+                                (next_tick - now).num_seconds().min(60) as u64,
+                            ))
+                            .await;
+                        }
+                    });
+
+                    Ok(())
+                })
+            }),
             common_commands: Some(CommonCommands::all()),
         },
     })

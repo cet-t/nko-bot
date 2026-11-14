@@ -18,3 +18,4 @@ moelle_sample = { git = "https://github.com/cet-t/moelle_sample", features = [
 ] }
 moelle_a = { git = "https://github.com/cet-t/moelle_a", features = ["sfc"] }
 csv = "1.4"
+cron = "0.17"
