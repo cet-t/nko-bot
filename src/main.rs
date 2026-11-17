@@ -43,7 +43,7 @@ async fn main() -> anyhow::Result<()> {
 
                     let http = ctx.http.clone();
                     tokio::spawn(async move {
-                        let schedule = cron::Schedule::from_str("* * 9,21 * * * *").unwrap();
+                        let schedule = cron::Schedule::from_str("* * 0,9 * * * *").unwrap();
                         let mut next_tick = schedule.upcoming(chrono::Utc).next().unwrap();
                         loop {
                             let now = chrono::Utc::now();
