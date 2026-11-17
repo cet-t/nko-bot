@@ -1695,6 +1695,7 @@ dependencies = [
 [[package]]
 name = "seren-ex"
 version = "1.0.0-pre.1"
+source = "git+https://github.com/cet-t/serenity-template?rev=01b4779#01b47790f72a4084cae354a4c32dc73609e13e1b"
 dependencies = [
  "anyhow",
  "bitflags2",

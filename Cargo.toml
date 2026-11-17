@@ -4,8 +4,7 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-# seren-ex = { git = "https://github.com/cet-t/seren-ex" }
-seren-ex = { path = "../seren-ex" }
+seren-ex = { git = "https://github.com/cet-t/serenity-template", rev = "01b4779" }
 seren = { git = "https://github.com/cet-t/seren", rev = "0c1c6bf" }
 anyhow = "1"
 poise = "0.7"
